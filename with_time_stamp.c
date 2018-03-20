@@ -168,7 +168,7 @@ void parse_body(char *buf)
     q3_r = parse_coordinates(q3_r, 24, buf);
     q3_r = convertFromRadToDeg(q3_r);
     //memcpy(&z_r, buf+24, 4); 	
-    //z_r = ntohl(z_r);ll
+    //z_r = ntohl(z_r);
     q4_r = parse_coordinates(q4_r, 28, buf);
     q4_r = convertFromRadToDeg(q4_r);
 	
@@ -204,6 +204,7 @@ void handle_udp_msg(int fd)
 	    read_bytes += count;
 	    if (read_bytes >= 24) {
 		parse_header(&header, buf+cur_index, &time_stamp_sec, &time_stamp_nsec);
+		printf("time_stamp_sec = %d, time_stamp_nsec = %d", time_stamp_sec, time_stamp_nsec);
 		cur_index += 24;
 		if (strncmp(header.ID_String, "MXTP02", 6) == 0) {
 		    //Message type 02 - Pose data (Quaternion)
