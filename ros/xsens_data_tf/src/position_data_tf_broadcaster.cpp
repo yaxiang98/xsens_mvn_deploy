@@ -57,7 +57,7 @@ void parse_header(Header *header, char *buf, int *time_stamp_sec, int *time_stam
 	float_time_code /= 1000;
 	sec = (int)float_time_code;
 	nanosec = (int)((float_time_code - sec)*1000);
-	to_stamp_sec = sec + min*60;
+	to_stamp_sec = sec + min*100;
 	/* wrong logic!!
 	   nanosec = (int)((float_time_code - a)*1000); 
 	   float_time_code = (float)a;
@@ -80,7 +80,7 @@ void parse_header(Header *header, char *buf, int *time_stamp_sec, int *time_stam
 	float_time_code /= 1000;
 	sec = (int)float_time_code;
 	nanosec = (int)((float_time_code - sec)*1000);
-	to_stamp_sec = sec + min*60 + hour*60*60;
+	to_stamp_sec = sec + min*60 + hour*100*100;
 	/*wrong logic!!
 	  nanosec = (int)((float_time_code - a)*1000);
 	  float_time_code = (float)a;
