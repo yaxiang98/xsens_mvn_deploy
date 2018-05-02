@@ -30,8 +30,10 @@ void parse_header(Header *header, int *time_stamp_sec, int *time_stamp_nsec)
 	float temp;
 	float float_time_code;
 	double b = 0.0;
-   
+        int count = 0;
+        
 	scanf("%d", &(header->time_code));
+       
 	// header->time_code = ntohl(header->time_code);
 	float_time_code = (float)header->time_code;
 	//decoding time_code;
@@ -95,7 +97,7 @@ void parse_header(Header *header, int *time_stamp_sec, int *time_stamp_nsec)
 	}
 	
 	
-
+        
 	printf("time_code = %d\n", (int)header->time_code);
 	printf("time = %d:%d:%d.%d\n", hour, min, sec, nanosec);
 	printf("time stamp for rosmsg: %d.%d\n", *time_stamp_sec, *time_stamp_nsec);

@@ -1,0 +1,66 @@
+#include <stdio.h>
+
+int main
+{
+  int time_code;
+    if (header->time_code <= 99999) { //if time_code < 99.999;
+	float_time_code /= 1000;
+	//(debug) printf("float_time_code = header->time_code/1000 = %f\n", float_time_code);
+	sec = (int)float_time_code;
+	//(debug) printf("sec = (int)float_time_code = %d\n", sec);
+	nanosec = (int)((float_time_code - sec)*1000);
+	//(debug)printf("nanosec = %d\n", nanosec);
+	to_stamp_sec = sec;
+		
+	//**convert to time stamp**
+	*time_stamp_sec = to_stamp_sec;
+	*time_stamp_nsec = nanosec;
+    } else if (header->time_code > 99999 && header->time_code <= 9999999) { //if 99.999 < time_code <= 99:99.999;
+	float_time_code = float_time_code/100000;
+	min = (int)float_time_code;
+	a = (int)((float_time_code - min)*100000);
+	float_time_code = (float)a;
+	float_time_code /= 1000;
+	sec = (int)float_time_code;
+	nanosec = (int)((float_time_code - sec)*1000);
+	to_stamp_sec = sec + min*60;
+	/* wrong logic!!
+	   nanosec = (int)((float_time_code - a)*1000); 
+	   float_time_code = (float)a;
+	   float_time_code /= 100;
+	   min = (int)float_time_code;
+	   sec = (int)((float_time_code - min)*100);
+	   to_stamp_sec = sec + min*60; */
+	//**convert to time stamp**
+	*time_stamp_sec = to_stamp_sec;
+	*time_stamp_nsec = nanosec;
+    } else if (header->time_code > 9999999 && header->time_code <= 999999999) { //if 99:99.999 < time_code < 99:99:99.999;
+	float_time_code /= 10000000;
+	hour = (int)float_time_code;
+	a = (int)((float_time_code - hour)*10000000);
+	float_time_code = (float)a;
+	float_time_code = float_time_code/100000;
+	min = (int)float_time_code;
+	a = (int)((float_time_code - min)*100000);
+	float_time_code = (float)a;
+	float_time_code /= 1000;
+	sec = (int)float_time_code;
+	nanosec = (int)((float_time_code - sec)*1000);
+	to_stamp_sec = sec + min*60 + hour*60*60;
+	/*wrong logic!!
+	  nanosec = (int)((float_time_code - a)*1000);
+	  float_time_code = (float)a;
+	  float_time_code /= 100;
+	  min = (int)float_time_code;
+	  sec = (int)((float_time_code - min)*100);
+	  header->time_code = (int)header->time_code;
+	  header->time_code = header->time_code/100;
+	  hour = (int)header->time_code;
+	  min = (header->time_code - hour)*100;
+	  sec = sec + min*60 + hour*60*60; */
+	//convert to time stamp
+	*time_stamp_sec = to_stamp_sec;
+	*time_stamp_nsec = nanosec;
+    }
+    return 0;
+}
