@@ -57,7 +57,7 @@ void parse_header(Header *header, char *buf, int *time_stamp_sec, int *time_stam
 	float_time_code /= 1000;
 	sec = (int)float_time_code;
 	nanosec = (int)((float_time_code - sec)*1000);
-	to_stamp_sec = sec + min*60;
+	to_stamp_sec = sec + min*100;
 	/* wrong logic!!
 	   nanosec = (int)((float_time_code - a)*1000); 
 	   float_time_code = (float)a;
@@ -80,7 +80,7 @@ void parse_header(Header *header, char *buf, int *time_stamp_sec, int *time_stam
 	float_time_code /= 1000;
 	sec = (int)float_time_code;
 	nanosec = (int)((float_time_code - sec)*1000);
-	to_stamp_sec = sec + min*60 + hour*60*60;
+	to_stamp_sec = sec + min*100 + hour*100*100;
 	/*wrong logic!!
 	  nanosec = (int)((float_time_code - a)*1000);
 	  float_time_code = (float)a;
@@ -226,9 +226,10 @@ void handle_udp_msg(int fd, int argc, char* argv[])
     ros::NodeHandle n;
     //ros::Publisher data_publisher = n.advertise<sensor_msgs::JointState>("position_data", 50);
     tf::TransformBroadcaster pelvis, l5, l3, t12, t8, neck, head, right_shoulder, right_upper_arm, right_forearm, right_hand, left_shoulder, left_upper_arm, left_forearm, left_hand, right_upper_leg, right_lower_leg, right_foot, right_toe, left_upper_leg, left_lower_leg, left_foot, left_toe;
-    while(1) 
+   
+    while(ros::ok) 
     {
-	while(ros::ok()) {
+	while(1) {
 	    memset(buf, 0, BUFF_LEN);
 	    count = recvfrom(fd, buf+read_bytes, BUFF_LEN, 0, (struct sockaddr*)&client_addr, &len);
 	    if(count == -1)
