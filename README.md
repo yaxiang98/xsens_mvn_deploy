@@ -6,7 +6,7 @@ Xsens has two versions of software:
 - Xsens MVN Analyze
 - Xsens Animate Pro.
 
-In 2018, the company seems merge the two versions into one called MVN 2018. But now the company seems to separate the versions again, now the suggest software under the offical website is MVN Analyze 2019. 
+In 2018, the company seems to merge the two versions into one called MVN 2018. But now the company seems to separate the versions again, now the suggest software under the offical website is MVN Analyze 2019. 
 
 Download MVN Analyze 2019: https://www.xsens.com/download/MVN/mvn2019/mvn_2019_0_setup.exe 
 
